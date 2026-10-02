@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct AACBoardApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([])
+        let schema = Schema([AACCategory.self, AACPictogram.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
@@ -24,6 +24,13 @@ struct AACBoardApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    do {
+                        try PreloadDataService.insertSeedData(into: sharedModelContainer.mainContext)
+                    } catch {
+                        print("Error al generar el modelo de datos: \(error)")
+                    }
+                }
         }
         .modelContainer(sharedModelContainer)
     }

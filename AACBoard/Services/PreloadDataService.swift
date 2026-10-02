@@ -19,6 +19,7 @@ struct PreloadDataService {
                 context.insert(category)
             }
             try context.save()
+            print("Datos semilla inyectados con éxito.")
         }
     }
     
@@ -27,7 +28,7 @@ struct PreloadDataService {
     }
     
     private static func buildSeedModels() -> [AACCategory] {
-        var result: [AACCategory] = [
+        let result: [AACCategory] = [
             AACCategory(
                 name: "Personas",
                 hexColor: "#FFEB3B",
